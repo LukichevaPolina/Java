@@ -5,6 +5,17 @@ public class Matrix {
     int col_num;
     Complex[][] matrix;
 
+    public Matrix() {
+        str_num = 10;
+        col_num = 10;
+        matrix = new Complex[10][10];
+        for (int i = 0; i < 10; ++i) {
+            for (int j = 0; j < 10; ++j) {
+                matrix[i][j] = new Complex();
+            }
+        }
+    }
+
     public Matrix(int _str_num, int _col_num) {
         str_num = _str_num;
         col_num =_col_num;
@@ -30,51 +41,52 @@ public class Matrix {
         return m;
     }
 
-    public static Matrix Add(Matrix first, Matrix second) {
-        if (!(first.str_num == second.str_num && first.col_num == second.col_num)) {
+    public Matrix Add(Matrix second) {
+        if (!(str_num == second.str_num && col_num == second.col_num)) {
             return null;
         }
-        Matrix new_m = new Matrix(first.str_num, second.col_num);
-        for (int i = 0; i < first.str_num; ++i) {
-            for (int j = 0; j < first.col_num; ++j) {
-                new_m.matrix[i][j] = Complex.Add(first.matrix[i][j], second.matrix[i][j]);
+        Matrix m = new Matrix(str_num, col_num);
+        for (int i = 0; i < str_num; ++i) {
+            for (int j = 0; j < col_num; ++j) {
+                m.matrix[i][j] = matrix[i][j].Add(second.matrix[i][j]);
             }
         }
-        return new_m;
+        return m;
     }
 
-    public static Matrix Sub(Matrix first, Matrix second) {
-        if (!(first.str_num == second.str_num && first.col_num == second.col_num)) {
+    public Matrix Sub(Matrix second) {
+        if (!(str_num == second.str_num && col_num == second.col_num)) {
             return null;
         }
-        Matrix new_m = new Matrix(first.str_num, second.col_num);
-        for (int i = 0; i < first.str_num; ++i) {
-            for (int j = 0; j < first.col_num; ++j) {
-                new_m.matrix[i][j] = Complex.Sub(first.matrix[i][j], second.matrix[i][j]);
+        Matrix m = new Matrix(str_num, col_num);
+        for (int i = 0; i < str_num; ++i) {
+            for (int j = 0; j < col_num; ++j) {
+                m.matrix[i][j] = matrix[i][j].Sub(second.matrix[i][j]);
             }
         }
-        return new_m;
+        return m;
     }
 
-    public static Matrix MuttNum(Matrix m, Complex num) {
-        for (int i = 0; i < m.str_num; ++i) {
-            for (int j = 0; j < m.col_num; ++j) {
-                m.matrix[i][j] = Complex.Mutt(m.matrix[i][j], num);
+    public Matrix MuttNum(Complex num) {
+        Matrix m = new Matrix(str_num, col_num);
+        for (int i = 0; i < str_num; ++i) {
+            for (int j = 0; j < col_num; ++j) {
+                m.matrix[i][j].Mutt(num);
             }
         }
         return m;
     }
 
 
-    public static Matrix MuttMat(Matrix first, Matrix second) {
-        if (!(first.col_num == second.str_num)) {
-            return null;
+    public Matrix MuttMat(Matrix second) {
+        if (!(col_num == second.str_num)) {
+            matrix = null;
         }
-        Matrix new_m = new Matrix(first.str_num, second.col_num);
+        Matrix new_m = new Matrix(str_num, second.col_num);
         for (int i = 0; i < second.col_num; ++i) {
-            for (int j = 0; j < first.str_num; ++j) {
-                for (int k = 0; k < first.col_num; ++k) {
-                    new_m.matrix[j][i] = Complex.Add(new_m.matrix[j][i], Complex.Mutt(first.matrix[j][k],second.matrix[k][i]));
+            for (int j = 0; j < str_num; ++j) {
+                for (int k = 0; k < col_num; ++k) {
+                    new_m.matrix[j][i].Add(matrix[j][k].Mutt(second.matrix[k][i]));
                 }
             }
         }
@@ -92,7 +104,7 @@ public class Matrix {
     }
 
     public void print() {
-        if (!(this == null)){
+        try {
             for (int i = 0; i < str_num; ++i) {
                 for (int j = 0; j < col_num; ++j) {
                     matrix[i][j].print();
@@ -100,7 +112,7 @@ public class Matrix {
                 System.out.print("\n");
             }
         }
-        else {
+        catch(NullPointerException e) {
             System.out.print("Exception");
         }
     }

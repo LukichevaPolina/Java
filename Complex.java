@@ -3,9 +3,9 @@ package com.company;
 import java.text.DecimalFormat;
 
 public class Complex {
-    double a;
-    double b;
-    boolean isAlgebraic;
+    private double a;
+    private double b;
+    private boolean isAlgebraic;
 
     public Complex() {
         a = 0;
@@ -24,29 +24,29 @@ public class Complex {
         isAlgebraic = true;
     }
 
-    public static Complex Add(Complex first, Complex second){
-        first.toAlg();
+    public Complex Add(Complex second) {
+        toAlg();
         second.toAlg();
-        return (new Complex(first.a + second.a, first.b + second.b));
+        return (new Complex(a + second.a, b + second.b));
     }
 
-    public static Complex Sub(Complex first, Complex second){
-        first.toAlg();
+    public Complex Sub(Complex second) {
+        toAlg();
         second.toAlg();
-        return (new Complex(first.a - second.a, first.b - second.b));
+        return (new Complex(a - second.a, b - second.b));
     }
 
-    public static Complex Mutt(Complex first, Complex second){
-        first.toAlg();
+    public Complex Mutt(Complex second){
+        toAlg();
         second.toAlg();
-        return ( new Complex(first.a * second.a - first.b * second.b, first.a * second.b + first.b * second.a));
+        return (new Complex (a * second.a - b * second.b,a * second.b + b * second.a));
     }
 
-    public static Complex Div(Complex first, Complex second){
-        first.toAlg();
+    public Complex Div(Complex second){
+        toAlg();
         second.toAlg();
-        return (new Complex((first.a * second.a + first.b * second.b) / (second.a * second.a + second.b * second.b),
-                (first.b * second.a - first.a * second.b) / (second.a * second.a + second.b * second.b)));
+        return (new Complex ((a * second.a + b * second.b) / (second.a * second.a + second.b * second.b),
+                (b * second.a - a * second.b) / (second.a * second.a + second.b * second.b)));
     }
 
     public void toTrig(){
@@ -90,8 +90,7 @@ public class Complex {
         a.print();
         Complex b = new Complex (7, 8);
         b.print();
-        Complex.Add(a,b).print();
-        a.print();
+        a.Add(b).print();
         Complex c = new Complex(4);
         c.print();
     }

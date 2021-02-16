@@ -5,13 +5,13 @@ public class Main {
 
         Complex c1 = new Complex (1, 1);
         Complex c2 = new Complex (3, 4);
-        Complex.Add(c1, c2).print();
+        c1.Add(c2).print();
         // 4.0 + 5.0i
-        Complex.Sub(c1, c2).print();
+        c1.Sub(c2).print();
         //-2.0 - 3.0i
-        Complex.Mutt(c1, c2).print();
+        c1.Mutt(c2).print();
         //-1.0 + 7.0i
-        Complex.Div(c1, c2).print();
+        c1.Div(c2).print();
         //0.28 - 0.04i
         c1.toTrig();
         c1.print();
@@ -19,8 +19,8 @@ public class Main {
 
         Matrix m1 = Matrix.Read();
         Matrix m2 = Matrix.Read();
-        Matrix.Add(m1, m2).print();
-        Matrix.Sub(m1, m2).print();
-        Matrix.MuttMat(m1, m2).print();
+        Matrix m3 = new Matrix();
+        m1.Add(m2).print();
+        m1.Sub(m2).print();
     }
 }
