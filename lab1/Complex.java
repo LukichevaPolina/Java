@@ -12,13 +12,14 @@ public class Complex {
         b = 0;
         isAlgebraic = true;
     }
-    public Complex(double _a){
+
+    public Complex(double _a) {
         a = _a;
         b = 0;
         isAlgebraic = true;
     }
 
-    public Complex(double _a, double _b){
+    public Complex(double _a, double _b) {
         a = _a;
         b = _b;
         isAlgebraic = true;
@@ -36,20 +37,20 @@ public class Complex {
         return (new Complex(a - second.a, b - second.b));
     }
 
-    public Complex Mutt(Complex second){
+    public Complex Mutt(Complex second) {
         toAlg();
         second.toAlg();
         return (new Complex (a * second.a - b * second.b,a * second.b + b * second.a));
     }
 
-    public Complex Div(Complex second){
+    public Complex Div(Complex second) {
         toAlg();
         second.toAlg();
         return (new Complex ((a * second.a + b * second.b) / (second.a * second.a + second.b * second.b),
                 (b * second.a - a * second.b) / (second.a * second.a + second.b * second.b)));
     }
 
-    public void toTrig(){
+    public void toTrig() {
         if (isAlgebraic) {
             isAlgebraic = false;
             a = Math.sqrt(a * a + b * b); // r
@@ -67,7 +68,7 @@ public class Complex {
     }
 
     public void print() {
-        if (isAlgebraic){
+        if (isAlgebraic) {
             if (b > 0) {
                 System.out.println(a + " + " + b + "i");
             }
@@ -84,15 +85,6 @@ public class Complex {
             String _b = df.format(b);
             System.out.println(_a + "(cos(" + _b + ") + sin(" + _b + "))");
         }
-    }
-    public static void main(String[] args) {
-        Complex a = new Complex(5, 6);
-        a.print();
-        Complex b = new Complex (7, 8);
-        b.print();
-        a.Add(b).print();
-        Complex c = new Complex(4);
-        c.print();
     }
 }
 

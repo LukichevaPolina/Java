@@ -27,23 +27,17 @@ public class Matrix {
         }
     }
 
-    public static Matrix Read() {
-        Scanner in = new Scanner(System.in);
-        int str_num = in.nextInt();
-        int col_num = in.nextInt();
-        Matrix m = new Matrix(str_num, col_num);
-        for (int i = 0; i < str_num; ++i)
-            for (int j = 0; j < col_num; ++j) {
-                double a = in.nextDouble();
-                double b = in.nextDouble();
-                m.matrix[i][j] = new Complex(a, b);
-            }
-        return m;
+    public void SetValue(Complex a, int i, int j) {
+        if (i >= str_num || j >= col_num) {
+            throw new ArithmeticException("*** wrong size of matrix ***");
+        }
+
+        matrix[i][j] = a;
     }
 
     public Matrix Add(Matrix second) {
         if (!(str_num == second.str_num && col_num == second.col_num)) {
-            return null;
+            throw new ArithmeticException("*** wrong size of matrix ***");
         }
         Matrix m = new Matrix(str_num, col_num);
         for (int i = 0; i < str_num; ++i) {
@@ -56,7 +50,7 @@ public class Matrix {
 
     public Matrix Sub(Matrix second) {
         if (!(str_num == second.str_num && col_num == second.col_num)) {
-            return null;
+            throw new ArithmeticException("*** wrong size of matrix ***");
         }
         Matrix m = new Matrix(str_num, col_num);
         for (int i = 0; i < str_num; ++i) {
@@ -80,7 +74,7 @@ public class Matrix {
 
     public Matrix MuttMat(Matrix second) {
         if (!(col_num == second.str_num)) {
-            matrix = null;
+            throw new ArithmeticException("*** wrong size of matrix ***");
         }
         Matrix new_m = new Matrix(str_num, second.col_num);
         for (int i = 0; i < second.col_num; ++i) {
